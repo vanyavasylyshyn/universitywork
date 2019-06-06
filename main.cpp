@@ -1,14 +1,54 @@
-#include <iostream>
-#include <iomanip>
-#include <cstring>
+#include "main.h"
 
-struct BILET {
-    std::string punkt;
-    int number_of_avia;
-    std::string pib[3];
-    int data[3];
-    BILET *next;
-};
+int main() {
+
+    BILET bilet,*beg = 0;
+
+    int menu;
+
+
+    while(true)
+    {
+        std::cout << "Choose one: " << std::endl;
+        std::cout << "1.Get all bilets." << std::endl;
+        std::cout << "2.Add new bilet." << std::endl;
+        std::cout << "3.Delete a bilet." << std::endl;
+        std::cout << "4.Find a bilet." << std::endl;
+        std::cout << "5.Cancel a program." << std::endl;
+        std::cin >> menu;
+        switch(menu)
+        {
+            case 1:
+            {
+                get_all_BILETS(beg);
+            }break;
+            case 2:
+            {
+                beg = create_BILET(beg, read_BILET());
+            }break;
+            case 3:
+            {
+                beg = delete_BILET(beg);
+            }break;
+            case 4:
+            {
+                find_BILET(beg);
+            }break;
+            case 5:
+            {
+                return 0;
+            }
+            default:
+            {
+                std::cout << "Something wrong..." << std::endl;
+            }
+        }
+
+    }
+
+}
+
+//functions
 
 BILET * create_BILET(BILET* beg, BILET * bilet)
 {
@@ -86,14 +126,13 @@ void find(BILET * pv, int number)
         if(pv->number_of_avia == number)
         {
             std::cout << "Punkt:" << std::setw(15) << pv->punkt << "; Number:" << std::setw(5) << pv->number_of_avia
-            << "; PIB:" << std::setw(13) << pv->pib[0] << " "<< std::setw(2) << pv->pib[1] << " "
-            <<std::setw(2) << pv->pib[2] << "; Data: " << std::setw(2) << pv->data[0] << " " <<std::setw(2)
-            << pv->data[1] << " " <<std::setw(2) << pv->data[2] << std::endl;
+                      << "; PIB:" << std::setw(13) << pv->pib[0] << " "<< std::setw(2) << pv->pib[1] << " "
+                      <<std::setw(2) << pv->pib[2] << "; Data: " << std::setw(2) << pv->data[0] << " " <<std::setw(2)
+                      << pv->data[1] << " " <<std::setw(2) << pv->data[2] << std::endl;
         }
         pv = pv->next;
     }
 }
-
 
 void find(BILET * pv, const int data[3])
 {
@@ -102,14 +141,13 @@ void find(BILET * pv, const int data[3])
         if(pv->data[0] == data[0] && pv->data[1] == data[1] && pv->data[2] == data[2])
         {
             std::cout << "Punkt:" << std::setw(15) << pv->punkt << "; Number:" << std::setw(5) << pv->number_of_avia
-            << "; PIB:" << std::setw(13) << pv->pib[0] << " "<< std::setw(2) << pv->pib[1] << " "
-            <<std::setw(2) << pv->pib[2] << "; Data: " << std::setw(2) << pv->data[0] << " " <<std::setw(2)
-            << pv->data[1] << " " <<std::setw(2) << pv->data[2] << std::endl;
+                      << "; PIB:" << std::setw(13) << pv->pib[0] << " "<< std::setw(2) << pv->pib[1] << " "
+                      <<std::setw(2) << pv->pib[2] << "; Data: " << std::setw(2) << pv->data[0] << " " <<std::setw(2)
+                      << pv->data[1] << " " <<std::setw(2) << pv->data[2] << std::endl;
         }
         pv = pv->next;
     }
 }
-
 
 void find_BILET(BILET * beg)
 {
@@ -150,9 +188,6 @@ void get_all_BILETS(BILET * beg)
 
 }
 
-
-
-//entering information about new bilet
 BILET * read_BILET()
 {
     BILET * bilet = new BILET;
@@ -168,61 +203,4 @@ BILET * read_BILET()
 
 
     return  bilet;
-}
-
-
-
-
-
-int main() {
-
-    BILET bilet,*beg = 0;
-
-    int menu;
-
-
-    while(true)
-    {
-        std::cout << "Choose one: " << std::endl;
-        std::cout << "1.Get all bilets." << std::endl;
-        std::cout << "2.Add new bilet." << std::endl;
-        std::cout << "3.Delete a bilet." << std::endl;
-        std::cout << "4.Find a bilet." << std::endl;
-        std::cout << "5.Cancel a program." << std::endl;
-        std::cin >> menu;
-        switch(menu)
-        {
-            case 1:
-            {
-                get_all_BILETS(beg);
-            }break;
-            case 2:
-            {
-                beg = create_BILET(beg, read_BILET());
-            }break;
-            case 3:
-            {
-                beg = delete_BILET(beg);
-            }break;
-            case 4:
-            {
-                find_BILET(beg);
-            }break;
-            case 5:
-            {
-                return 0;
-            }
-            default:
-            {
-                std::cout << "Something wrong..." << std::endl;
-            }
-        }
-
-    }
-
-
-
-
-
-
 }
